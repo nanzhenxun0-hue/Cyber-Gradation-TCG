@@ -1,0 +1,111 @@
+/* --- 基本設定 --- */
+:root {
+    --bg-dark: #050505;
+    --neon-blue: #00ffff;
+    --neon-red: #ff4500;
+    --text-main: #e0e0e0;
+    --border-gray: #333;
+}
+
+body {
+    margin: 0;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Segoe UI', 'Roboto', 'Courier New', monospace;
+    overflow: hidden;
+    user-select: none;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+/* --- HPゲージ（グラデーションでリソースを表現） --- */
+.hp-gauge {
+    position: relative;
+    width: 300px;
+    height: 25px;
+    background: #111;
+    border: 1px solid var(--border-gray);
+    margin: 10px;
+    overflow: hidden;
+}
+
+.hp-gauge .bar {
+    height: 100%;
+    transition: width 0.5s ease-out;
+}
+
+.player .bar { background: linear-gradient(90deg, #008000, #adff2f); }
+.enemy .bar { background: linear-gradient(90deg, #8b0000, #ff4500); }
+
+/* --- ユニットスロット --- */
+.unit-slots {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.slot {
+    width: 120px;
+    height: 160px;
+    border: 1px dashed var(--border-gray);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+/* --- カードの基本スタイル（完璧なポータビリティ） --- */
+.card {
+    width: 140px;
+    height: 190px;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: transform 0.2s, margin-top 0.2s;
+    position: relative;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    margin-top: -20px;
+    z-index: 10;
+}
+
+.card .name { font-weight: bold; font-size: 0.9em; }
+.card .cost { position: absolute; top: 5px; right: 5px; font-weight: bold; }
+.card .stats { position: absolute; bottom: 5px; width: 90%; display: flex; justify-content: space-between; }
+
+/* --- アニメーション・エフェクト --- */
+.rarity-UR {
+    animation: ur-pulse 1.5s infinite;
+    border: 2px solid gold;
+}
+
+@keyframes ur-pulse {
+    0% { box-shadow: 0 0 5px gold; }
+    50% { box-shadow: 0 0 25px gold; }
+    100% { box-shadow: 0 0 5px gold; }
+}
+
+#log-console {
+    height: 80px;
+    padding: 10px;
+    font-size: 0.85em;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    background: rgba(0, 255, 255, 0.02);
+    overflow-y: hidden;
+}
+
+.hand-container {
+    display: flex;
+    justify-content: center;
+    gap: -20px; /* カードを少し重ねる */
+    padding: 20px;
+}
